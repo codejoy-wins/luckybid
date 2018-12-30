@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Database</title>
+</head>
+<body>
+    <h1> On this page I will display information from the database</h1>
+    <!-- also display the products -->
+
+    <!-- not working -->
+    <p>{{jay}}</p>
+    <p>Current Users in Database :
+
+        {% for user in users %}
+        <h2>{{user.first_name}} {{user.last_name}}</h2>
+        <p>{{user.address}} {{user.email}}</p>
+
+        {% endfor %}
+
+    </p>
+    
+
+    <a href="/">Go Home</a>
+</body>
+</html>
