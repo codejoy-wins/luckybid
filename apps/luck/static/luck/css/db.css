@@ -1,0 +1,36 @@
+body{
+    background-image: url("../images/purple.jpg");
+}
+a{
+    text-decoration: none;
+    color: white;
+}
+#users{
+    /* color:rgb(255, 255, 255); */
+    background-color: rgba(255, 217, 0, 0.37);
+    display: inline-block;
+    width: 45%;
+    padding: 10px;
+}
+#products{
+    color:rgb(255, 144, 144);
+    background-color: rgba(0, 0, 255, 0.322);
+    display: inline-block;
+    width: 45%;
+    padding: 10px;
+    text-align: right;
+}
+
+.user{
+    outline: 2ch solid black;
+}
+
+.product{
+    outline: 1ch dotted black;
+}
+
+.bid{
+    outline: .5ch solid dodgerblue;
+    font-size: .2ch;
+    display: inline-block;
+}

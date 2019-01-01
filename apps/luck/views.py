@@ -10,6 +10,10 @@ from models import *
 
 # Create your views here.
 def index(request):
+    if 'user_id' in request.session:
+        print 'id in sesh already'
+        return redirect('/welcome')
+
     request.session['cat'] = 'cookie'
     print request.session['cat']
     return render(request, "index.html")
@@ -22,8 +26,9 @@ def login(request):
     print "loggingin"
     if(request.POST['password'] == request.POST['confirm_password']):
         print 'MATCHED'
-        User.objects.create(first_name = request.POST['first_name'], last_name = request.POST['last_name'], address = request.POST['shipping_address'], email = request.POST['email'] , username = request.POST['username'], password = request.POST['password'])
+        the_user = User.objects.create(first_name = request.POST['first_name'], last_name = request.POST['last_name'], address = request.POST['shipping_address'], email = request.POST['email'] , username = request.POST['username'], password = request.POST['password'])
         print "in db?"
+        request.session['user_id'] = the_user.id
         return redirect('/')
 
     else:
@@ -56,9 +61,17 @@ def logintrue(request):
 
 def db(request):
     print User.objects.all()
+    print Product.objects.all()
+    if not 'user_id' in request.session:
+        print 'no id in sesh'
+        return redirect('/')
+    print request.session['user_id'], "is user id in sesh"
     context = {
         'jay':'silent bob',
-        'users': User.objects.all()
+        'bids': Bid.objects.all(),
+        'users': User.objects.all(),
+        'products': Product.objects.all(),
+        'master': User.objects.get(id=request.session['user_id']),
     }
     return render(request, "db.html", context)
 
@@ -79,6 +92,34 @@ def welcome(request):
 def logout(request):
     request.session.clear()
     print "logging out"
-    return redirect('/odell')
+    return redirect('/')
+
+def product(request):
+    print "product UI"
+    return render(request, "product.html")
+
+def addproduct(request):
+    print "adding product"
+    print request.POST['name']
+    suzy = Product.objects.create(name=request.POST['name'], description=request.POST['description'], price = request.POST['price'], category = request.POST['category'])
+    print suzy.name ,"is suzys name"
+    return redirect("/product")
+
+def destroy(request, product_id):
+    print "Destroy view"
+    print product_id
+    Product.objects.get(id=product_id).delete()
+    return redirect('/db')
+
+def bid(request, master_id, product_id):
+    print "Bid Method"
+    the_user = User.objects.get(id=master_id)
+    the_product = Product.objects.get(id=product_id)
+    print the_user.first_name, "is the user"
+    print the_product.name, "is the product"
+    print master_id, " is bidding on ", product_id
+    Bid.objects.create(bidder=the_user, product =the_product)
+    return redirect('/db')
+
 def odell(request):
     return render(request, "odell.html")
