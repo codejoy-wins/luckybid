@@ -2,9 +2,9 @@
 
 # how do I increase bidcount in db each time a bid is made?
 
-
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
+from random import *
 
 from django.shortcuts import render, redirect
 from models import *
@@ -126,6 +126,15 @@ def bid(request, master_id, product_id):
     print the_product.name, "is the product"
     print master_id, " is bidding on ", product_id
     Bid.objects.create(bidder=the_user, product =the_product)
+    all_bids = Bid.objects.all()
+    
+    if the_product.bidcount >= 100:
+        print "unacceptable2"
+        winner = xp(all_bids)
+        print winner.bidder.first_name, " is the winner!"
+        the_product.winner = winner.bidder.first_name
+        print the_product.winner, ' is product.winner'
+        the_product.save()
     return redirect('/db')
 
 def bid2(request, master_id, product_id):
@@ -143,7 +152,6 @@ def bid2(request, master_id, product_id):
     Bid.objects.create(bidder=the_user, product =the_product)
     all_bids = Bid.objects.all()
     
-# bids = all bids
     if the_product.bidcount >= 100:
         print "unacceptable2"
         winner = xp(all_bids)
@@ -156,7 +164,7 @@ def bid2(request, master_id, product_id):
 
 def xp(r):
     print r
-    rando = 42
+    rando = randint(1,100)
     # change 42 to legit 1-100 later
     return r[rando]
     # this is function to pick random from 1-100

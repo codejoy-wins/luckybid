@@ -10,14 +10,18 @@
     <h1>Add Product UI</h1>
     <h2>Admin Only</h2>
 
-    <form action="/addproduct" method="POST">
+    <form action="/addproduct" method="POST" id = "addpro">
                 {% csrf_token %}
         <p>Name<input type="text" name="name"></p>
         <p>Price<input type="number" name="price"></p>
-        <p>Description<input type="text" name="description"></p>
+        <!-- <p>Description<input type="text" name="description"></p> -->
+        <p>Description:</p> <textarea name="description" form="addpro" cols="30" rows="10"></textarea>
+            
         <p>Category<input type="text" name="category"></p>
         <p><input type="submit" value="obey"></p>
     </form>
+       
+        
     <a href="/">Go home</a>
 </body>
 </html>
