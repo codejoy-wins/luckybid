@@ -7,9 +7,16 @@ urlpatterns = [
     url(r'^loginreg2$', views.loginreg2),
     url(r'^login$', views.login),
     url(r'^db$', views.db),
+    url(r'^db2$', views.db2),
+
     url(r'^logintrue$', views.logintrue),
     url(r'^welcome$', views.welcome),
     url(r'^product$', views.product),
+    url(r'^money$', views.money),
+    url(r'^snap/(?P<user_id>\d+)$', views.snap),
+
+
+
     url(r'^addproduct$', views.addproduct),
     # url(r'^edit/(?P<player_id>\d+)$', views.edit),
     url(r'^destroy/(?P<product_id>\d+)$', views.destroy),

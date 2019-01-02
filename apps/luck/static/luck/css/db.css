@@ -20,17 +20,37 @@ a{
     padding: 10px;
     text-align: right;
 }
-
 .user{
     outline: 2ch solid black;
 }
-
 .product{
     outline: 1ch dotted black;
 }
 
 .bid{
+    outline: .5ch solid rgb(255, 158, 30);
+    font-size: .2ch;
+    display: inline-block;
+}
+#bids :hover{
+    outline: 2ch solid aquamarine;
+}
+#bids .bid2 :hover{
+    outline: .5ch dotted green;
+}
+.bid2{
     outline: .5ch solid dodgerblue;
     font-size: .2ch;
     display: inline-block;
+}
+.bid2 :hover{
+    outline: .5ch solid dodgerblue;
+    font-size: .2ch;
+    display: inline-block;
+}
+#tough a{
+    color: aqua;
+}
+.bid2 a {
+    color:black;
 }

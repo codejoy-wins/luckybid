@@ -1,10 +1,11 @@
 body{
-    background-image: url(../images/water.png);
+    background-image: url(../images/welome.jpg);
+    background-repeat: no-repeat;
     background-size: cover;
 }
 
 *{
-    color:silver;
+    color:whitesmoke;
 }
 #rapper{
     margin: 0 auto;

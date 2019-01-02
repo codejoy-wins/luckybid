@@ -14,7 +14,7 @@
             <p>Current Users in Database :
                     {% for user in users %}
                     <div class="user">
-                            <h2>{{user.first_name}} {{user.last_name}}</h2>
+                            <h2 id="tough">{{user.first_name}} {{user.last_name}}<a href="/snap/{{user.id}}">[X]</a></h2>
                             <p>{{user.address}} {{user.email}}</p>
                     </div>
                     {% endfor %}
@@ -27,7 +27,21 @@
                             <h2> <a href="/product/{{product.id}}"> {{product.name}}</a><a href="destroy/{{product.id}}">[X]?</a></h2>
                             <h3> </h3>
                             <p>{{product.description}} {{product.category}}</p>
+                            <!-- <h4> <a href="bid/{{master.id}}/{{product.id}}">Bid on {{product.name}}?</a> </h4> -->
+                            <h5>
+                                    {% if product.winner == "undecided" %}
+                                         <p>Bidding OPEN</p>
                             <h4> <a href="bid/{{master.id}}/{{product.id}}">Bid on {{product.name}}?</a> </h4>
+
+                                    {% endif %}
+
+                                    {% if product.winner != "undecided" %}
+                                         <p>WINNER: {{product.winner}}</p>
+                                    {% endif %}
+
+                                    
+
+                            </h5>
                             <ul>
                                     {% for bid in bids %}
                                     <div class="bid">
@@ -54,5 +68,6 @@
     </div>
     <a href="/">Go Home</a>
     <a href="/logout">Logout</a>
+    <a href="/db2">DB2</a>
 </body>
 </html>

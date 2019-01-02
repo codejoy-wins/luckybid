@@ -76,6 +76,22 @@ def db(request):
     }
     return render(request, "db.html", context)
 
+def db2(request):
+    print User.objects.all()
+    print Product.objects.all()
+    if not 'user_id' in request.session:
+        print 'no id in sesh'
+        return redirect('/')
+    print request.session['user_id'], "is user id in sesh"
+    context = {
+        'jay':'silent bob',
+        'bids': Bid.objects.all(),
+        'users': User.objects.all(),
+        'products': Product.objects.all(),
+        'master': User.objects.get(id=request.session['user_id']),
+    }
+    return render(request, "db2.html", context)
+
 def welcome(request):
 
     # redirect to home if not logged on
@@ -117,6 +133,10 @@ def bid(request, master_id, product_id):
     print "Bid Method"
     the_user = User.objects.get(id=master_id)
     the_product = Product.objects.get(id=product_id)
+
+    if(the_user.luckybucks <= 0):
+        print "out of cash"
+        return redirect('/')
     print the_product.bidcount,  " is current bidcount"
     the_product.bidcount += 1
     print the_product.bidcount, " is now bidcount"
@@ -140,11 +160,17 @@ def bid(request, master_id, product_id):
 def bid2(request, master_id, product_id):
     print "Bid2 Method"
     the_user = User.objects.get(id=master_id)
+    if(the_user.luckybucks <= 0):
+        print "out of cash"
+        return redirect('/')
     the_product = Product.objects.get(id=product_id)
     print the_product.bidcount,  " is current bidcount"
     the_product.bidcount += 1
+    # increase bid and decrease luckybucks
+    the_user.luckybucks -= 1
     print the_product.bidcount, " is now bidcount"
     the_product.save()
+    the_user.save()
 
     print the_user.first_name, "is the user"
     print the_product.name, "is the product"
@@ -152,14 +178,20 @@ def bid2(request, master_id, product_id):
     Bid.objects.create(bidder=the_user, product =the_product)
     all_bids = Bid.objects.all()
     
-    if the_product.bidcount >= 100:
+    if the_product.bidcount == 100:
         print "unacceptable2"
         winner = xp(all_bids)
         print winner.bidder.first_name, " is the winner!"
         the_product.winner = winner.bidder.first_name
         print the_product.winner, ' is product.winner'
         the_product.save()
-
+    if the_product.bidcount >100:
+        print "unacceptable1"
+        the_product.bidcount-=1
+        the_product.bidcount=100
+        the_product.save()
+        the_user.luckybucks+=1
+        the_user.save()
     return redirect('/product/'+ product_id)
 
 def xp(r):
@@ -181,6 +213,21 @@ def productx(request,product_id):
         "master": the_user,
     }
     return render(request, "productview.html", context)
+
+def money(request):
+    print "money function"
+    the_user = User.objects.get(id=request.session['user_id'])
+    the_user.luckybucks+=100
+    the_user.save()
+    return redirect('/')
+
+def snap(request, user_id):
+    print "snapping fingers"
+    print user_id
+    the_user = User.objects.get(id=user_id)
+    the_user.delete()
+    # idk how to delete user
+    return redirect('/db')
 
 def odell(request):
     return render(request, "odell.html")

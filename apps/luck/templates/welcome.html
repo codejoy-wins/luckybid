@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Welcome</title>
-    <link rel="stylesheet" href="../static/luck/css/welcome.css">
+    <link rel="stylesheet" href="../static/luck/css/truewelcome.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
 </head>
 <body>
     <div id="rapper">
@@ -14,12 +15,30 @@
             <h2>ID: {{me}}</h2>
             <h3>Email: {{you.email}}</h3>
             <h3>Shipping Address: {{you.address}}</h3>
+            <h4>Lucky Bucks: {{you.luckybucks}}</h4>
+        <h5> <a href="/money">Add Lucky Bucks?</a></h5>
 
-            {% for bid in bids %}
-                {% if bid.bidder.first_name == you.first_name %}
-                <p>  ${{bid.product.price}} <a href="/product/{{bid.product.id}}">{{bid.product.name}}</a>  by {{bid.bidder.first_name}}</p>
-                {% endif %}
-            {% endfor %}
+            <table>
+                    <tr>
+                      <th>Price</th>
+                      <th>Product</th>
+                      <th>Bidder</th>
+                      <th>Winner</th>
+                    </tr>
+                    <tr>
+                      {% for bid in bids %}
+                        {% if bid.bidder.first_name == you.first_name %}
+                        <td>${{bid.product.price}}</td>
+                        <td><a href="/product/{{bid.product.id}}">{{bid.product.name}}</a></td>
+                        <td>{{bid.bidder.first_name}}</td>
+                        <td>{{bid.product.winner}}</td>
+                    </tr>
+
+                        {% endif %}
+                        {% endfor %}
+                    </tr>
+                    
+                  </table>
 
             <a href="/logout">Logout?</a>
             <a href="/db">View DB</a>

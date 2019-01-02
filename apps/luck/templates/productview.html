@@ -18,17 +18,24 @@
         {% endif %}
         <a href="/">Home</a>
         <a href="/db">DB</a>
+        <a href="/db2">DB2</a>
+
 
 
         <!-- work on h4 later -->
         <h4><a href="bid/{{master.id}}/{{product.id}}">Bid on {{product.name}}?</a></h4>
         
+        <h6>Lucky Bucks: {{master.luckybucks}}</h6>
 
-        {% for bid in bids %}
-            {% if bid.product.name == product.name %}
-                <p>{{bid.bidder.first_name}}</p>
-            {% endif %}
-        {% endfor %}
+        <h5> <a href="/money">Add Lucky Bucks?</a></h5>
+        <div id="bidz">
+                {% for bid in bids %}
+                    {% if bid.product.name == product.name %}
+                        <p>{{bid.bidder.first_name}}</p>
+                    {% endif %}
+                {% endfor %}
+        </div>
+        
     </div>
 </body>
 </html>
