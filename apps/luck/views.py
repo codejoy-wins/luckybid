@@ -229,5 +229,23 @@ def snap(request, user_id):
     # idk how to delete user
     return redirect('/db')
 
+def edit(request, user_id):
+    print "editing", user_id
+    the_user = User.objects.get(id=user_id)
+    context = {
+        'user': the_user,
+    }
+    return render(request,'edit.html', context)
+
+def editing(request):
+    print 'editing'
+    the_user = User.objects.get(id=request.session['user_id'])
+    print request.POST['address']
+    print request.POST['email']
+    the_user.email = request.POST['email']
+    the_user.address = request.POST['address']
+    the_user.save()
+    return redirect('/')
+
 def odell(request):
     return render(request, "odell.html")

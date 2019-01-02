@@ -12,7 +12,10 @@ body{
     text-align: center;
     font-family: 'Roboto', sans-serif;
 }
-
+#mybids{
+    height: 500px;
+    overflow: auto;
+}
 a{
     text-decoration: none;
 }
