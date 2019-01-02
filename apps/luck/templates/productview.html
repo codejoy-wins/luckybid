@@ -16,6 +16,12 @@
         {% if product.winner %}
         <p>winner: {{product.winner}}</p>
         {% endif %}
+        <h4><a href="bid/{{master.id}}/{{product.id}}">Bid on {{product.name}}?</a></h4>
+
+        <div id = "photo">
+            <h2>Photo of Product Here</h2>
+            <img src="../static/luck/images/{{product.id}}.jpg" alt="Product Photo">
+        </div>
         <a href="/">Home</a>
         <a href="/db">DB</a>
         <a href="/db2">DB2</a>
@@ -23,7 +29,6 @@
 
 
         <!-- work on h4 later -->
-        <h4><a href="bid/{{master.id}}/{{product.id}}">Bid on {{product.name}}?</a></h4>
         
         <h6>Lucky Bucks: {{master.luckybucks}}</h6>
 
