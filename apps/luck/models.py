@@ -14,6 +14,7 @@ class User (models.Model):
     username = models.CharField(max_length=255)
     wins = models.IntegerField(default = 0)
     losses = models.IntegerField(default = 0)
+    luckybucks = models.IntegerField(default = 0, null = True)
     created_at = models.DateTimeField(auto_now_add =True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -22,6 +23,8 @@ class Product (models.Model):
     description = models.TextField(default="N/A", null=True)
     price = models.IntegerField(default = 0)
     category = models.CharField(default = "default", max_length=255)
+    bidcount = models.IntegerField(default = 0, null=True)
+    winner = models.CharField(default = "undecided", null=True, max_length=255)
     created_at = models.DateTimeField(auto_now_add =True)
     updated_at = models.DateTimeField(auto_now=True)
 

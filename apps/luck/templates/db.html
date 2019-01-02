@@ -24,7 +24,7 @@
             <p>Current Products in Database :
                     {% for product in products %}
                     <div class="product">
-                            <h2>{{product.name}} {{product.name}}<a href="destroy/{{product.id}}">[X]?</a></h2>
+                            <h2> <a href="/product/{{product.id}}"> {{product.name}}</a><a href="destroy/{{product.id}}">[X]?</a></h2>
                             <h3> </h3>
                             <p>{{product.description}} {{product.category}}</p>
                             <h4> <a href="bid/{{master.id}}/{{product.id}}">Bid on {{product.name}}?</a> </h4>

@@ -14,6 +14,9 @@ urlpatterns = [
     # url(r'^edit/(?P<player_id>\d+)$', views.edit),
     url(r'^destroy/(?P<product_id>\d+)$', views.destroy),
     url(r'^bid/(?P<master_id>\d+)/(?P<product_id>\d+)$', views.bid),
+    url(r'^product/bid/(?P<master_id>\d+)/(?P<product_id>\d+)$', views.bid2),
+    
+    url(r'^product/(?P<product_id>\d+)$', views.productx),
 
 
     url(r'^logout$', views.logout),

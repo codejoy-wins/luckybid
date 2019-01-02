@@ -1,5 +1,6 @@
 # need to access request.Session and get an example going like request.SESSION['cat'] = "cookie"
 
+# how do I increase bidcount in db each time a bid is made?
 
 
 # -*- coding: utf-8 -*-
@@ -85,7 +86,8 @@ def welcome(request):
     context = {
         'jay': 'silent bob new',
         'me': request.session['user_id'],
-        'you': superuser
+        'you': superuser,
+        'bids': Bid.objects.all,
     }
     return render(request, "welcome.html", context)
 
@@ -115,11 +117,62 @@ def bid(request, master_id, product_id):
     print "Bid Method"
     the_user = User.objects.get(id=master_id)
     the_product = Product.objects.get(id=product_id)
+    print the_product.bidcount,  " is current bidcount"
+    the_product.bidcount += 1
+    print the_product.bidcount, " is now bidcount"
+    the_product.save()
+
     print the_user.first_name, "is the user"
     print the_product.name, "is the product"
     print master_id, " is bidding on ", product_id
     Bid.objects.create(bidder=the_user, product =the_product)
     return redirect('/db')
+
+def bid2(request, master_id, product_id):
+    print "Bid2 Method"
+    the_user = User.objects.get(id=master_id)
+    the_product = Product.objects.get(id=product_id)
+    print the_product.bidcount,  " is current bidcount"
+    the_product.bidcount += 1
+    print the_product.bidcount, " is now bidcount"
+    the_product.save()
+
+    print the_user.first_name, "is the user"
+    print the_product.name, "is the product"
+    print master_id, " is bidding on ", product_id
+    Bid.objects.create(bidder=the_user, product =the_product)
+    all_bids = Bid.objects.all()
+    
+# bids = all bids
+    if the_product.bidcount >= 100:
+        print "unacceptable2"
+        winner = xp(all_bids)
+        print winner.bidder.first_name, " is the winner!"
+        the_product.winner = winner.bidder.first_name
+        print the_product.winner, ' is product.winner'
+        the_product.save()
+
+    return redirect('/product/'+ product_id)
+
+def xp(r):
+    print r
+    rando = 42
+    # change 42 to legit 1-100 later
+    return r[rando]
+    # this is function to pick random from 1-100
+
+def productx(request,product_id):
+    the_user = User.objects.get(id = request.session["user_id"])
+    print "product xing"
+    print product_id
+    the_product = Product.objects.get(id=product_id)
+    print the_product.winner, " is the product winner baby"
+    context = {
+        "product": the_product,
+        "bids": Bid.objects.all(),
+        "master": the_user,
+    }
+    return render(request, "productview.html", context)
 
 def odell(request):
     return render(request, "odell.html")

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Product Viewer</title>
+    <link rel="stylesheet" href="../static/luck/css/welcome.css">
+</head>
+<body>
+    <div id = "rapper">
+        <!-- also display user wallet while bidding -->
+        <h1>Product {{product.id}} Viewer </h1>
+        <h2>${{product.price}} {{product.name}}</h2>
+        <h3>Bid Count: {{product.bidcount}}</h3>
+        {% if product.winner %}
+        <p>winner: {{product.winner}}</p>
+        {% endif %}
+        <a href="/">Home</a>
+        <a href="/db">DB</a>
+
+
+        <!-- work on h4 later -->
+        <h4><a href="bid/{{master.id}}/{{product.id}}">Bid on {{product.name}}?</a></h4>
+        
+
+        {% for bid in bids %}
+            {% if bid.product.name == product.name %}
+                <p>{{bid.bidder.first_name}}</p>
+            {% endif %}
+        {% endfor %}
+    </div>
+</body>
+</html>
