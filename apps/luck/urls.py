@@ -16,6 +16,8 @@ urlpatterns = [
     url(r'^snap/(?P<user_id>\d+)$', views.snap),
     url(r'^edit/(?P<user_id>\d+)$', views.edit),
     url(r'^editing$', views.editing),
+    url(r'^products$', views.products),
+
 
 
 

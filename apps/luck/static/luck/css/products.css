@@ -1,0 +1,15 @@
+.unit{
+    color:red;
+    padding: 10px;
+    background-color: gold;
+    display: inline-block;
+    width: 20%;
+}
+
+.mini{
+    width: 90%;
+}
+
+a{
+    text-decoration: none;
+}

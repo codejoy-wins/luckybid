@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>User Friendly Product Bidder</title>
+    <link rel="stylesheet" href="../static/luck/css/products.css">
+</head>
+<body>
+    <div id="rapper">
+        <h1>UI Product Bid Options</h1>
+        <h2>Go Shopping!</h2>
+        <h3>Luckybucks: {{master.luckybucks}}</h3>
+        
+            
+            {% for product in products %}
+                <div class="unit">
+                    <p><a href="product/bid/{{master.id}}/{{product.id}}">Bid on {{product.name}}?</a></p> 
+                    <img src="../static/luck/images/{{product.id}}.jpg" alt="product picture" class = "mini">
+                    <p>${{product.price}}{{product.name}}</p>
+                </div>
+            {% endfor %}
+    </div>
+    <h3><a href="/">Return Home</a> </h3>
+    
+</body>
+</html>

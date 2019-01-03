@@ -155,7 +155,8 @@ def bid(request, master_id, product_id):
         the_product.winner = winner.bidder.first_name
         print the_product.winner, ' is product.winner'
         the_product.save()
-    return redirect('/db')
+    return redirect('/product/'+ product_id)
+
 
 def bid2(request, master_id, product_id):
     print "Bid2 Method"
@@ -246,6 +247,15 @@ def editing(request):
     the_user.address = request.POST['address']
     the_user.save()
     return redirect('/')
+
+def products(request):
+
+    print "products"
+    context = {
+        'products': Product.objects.all(),
+        'master': User.objects.get(id=request.session['user_id']),
+    }
+    return render(request,"products.html",context)
 
 def odell(request):
     return render(request, "odell.html")

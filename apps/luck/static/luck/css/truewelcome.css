@@ -1,11 +1,13 @@
 body{
-    background-image: url(../images/welome.jpg);
+    background-image: url(../images/bright.png);
     background-repeat: no-repeat;
     background-size: cover;
 }
-
+h2 a:hover{
+    color:green;
+}
 *{
-    color:whitesmoke;
+    color:black;
 }
 #rapper{
     margin: 0 auto;

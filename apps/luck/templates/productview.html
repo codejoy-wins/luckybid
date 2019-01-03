@@ -11,6 +11,8 @@
     <div id = "rapper">
         <!-- also display user wallet while bidding -->
         <h1>Product {{product.id}} Viewer </h1>
+        <h4>Luckybucks:  {{master.luckybucks}}</h4>
+        <a href="/products">Keep Shopping?</a>
         <h2>${{product.price}} {{product.name}}</h2>
         <h3>Bid Count: {{product.bidcount}}</h3>
         {% if product.winner %}
